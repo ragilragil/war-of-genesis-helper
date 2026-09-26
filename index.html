@@ -1219,25 +1219,25 @@ body {
           <span>Bộ lọc bậc này <strong style="color:#e3b341;">CHỈ DÀNH CHO NGỌC</strong>: Hệ thống chỉ tự động ghép các bậc ngọc được tích dấu xanh (đủ 6 viên). Bậc không tích sẽ giữ nguyên để dùng hoặc khảm trang bị. <em>(Không áp dụng cho tính năng Ghép Trang bị / Trang sức Tier 3 ở trên).</em></span>
         </div>
       </div>
-
-      <!-- JEWEL PRESERVATION SETTINGS (KEEP SPECIFIC JEWEL TYPES) -->
-      <div id="jewelPreserveSettings" style="margin-top:14px; padding-top:12px; border-top:1px solid #30363d;">
-        <div id="jewelPreserveContainer"></div>
-      </div>
     </div>
 
     <!-- ACTIVITY LOG PANEL -->
-    <div class="jewel-control-card">
+    <div class="jewel-control-card" style="display:flex; flex-direction:column; margin-bottom:0;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
         <h3 style="margin:0; color:#f0f6fc; font-size:15px; display:flex; align-items:center; gap:8px;">
           📜 Nhật Ký Hoạt Động Lò Rèn & Kho
         </h3>
         <button class="small-btn" style="padding:2px 8px; font-size:11px;" onclick="clearJewelLogs()">Xóa log</button>
       </div>
-      <div class="jewel-log-box" id="jewelLogBox">
+      <div class="jewel-log-box" id="jewelLogBox" style="flex:1; min-height:260px; max-height:480px;">
         <div class="jewel-log-item"><span class="jewel-log-time">[Khởi động]</span> Hệ thống Lò rèn & Kho ngọc tự động đã sẵn sàng.</div>
       </div>
     </div>
+  </div>
+
+  <!-- JEWEL PRESERVATION SETTINGS (FULL WIDTH CARD) -->
+  <div id="jewelPreserveSettings" class="jewel-control-card" style="margin-bottom:16px; padding:16px;">
+    <div id="jewelPreserveContainer"></div>
   </div>
 
   <!-- TIER FUSION OVERVIEW CARDS (CẤP 1 ĐẾN CẤP 6) -->
@@ -17004,6 +17004,77 @@ function sendEvaluatePoll() {
           stats.lightningDamage = Number(getAb(1032).toFixed(1));
           stats.poisonDamage = Number(getAb(1042).toFixed(1));
           stats.ignoreBlock = getAb(1092);
+          stats.finalDamageBonus = Number(getAb(1146).toFixed(1));
+          stats.finalDamageReduction = Number(getAb(1147).toFixed(1));
+          stats.pveDamageDealt = Number(getAb(1060).toFixed(1));
+          stats.pveDamageTakenReduction = Number(getAb(1061).toFixed(1));
+          stats.pvpDamageDealt = Number(getAb(1062).toFixed(1));
+          stats.pvpDamageTakenReduction = Number(getAb(1063).toFixed(1));
+          stats.critRateResist = Number(getAb(1074).toFixed(1));
+          stats.blockRate = Number(getAb(1090).toFixed(1));
+          stats.stunResist = Number(getAb(1075).toFixed(1));
+          stats.stunDurationReduction = Number(getAb(1076).toFixed(1));
+          stats.lightningHitRate = Number(getAb(1030).toFixed(1));
+          stats.fireHitRate = Number(getAb(1035).toFixed(1));
+          stats.poisonHitRate = Number(getAb(1040).toFixed(1));
+          stats.stunHitRate = Number(getAb(1045).toFixed(1));
+          stats.shockDebuffRate = Number(getAb(1097).toFixed(1));
+          stats.burnDebuffRate = Number(getAb(1099).toFixed(1));
+          stats.poisonDebuffRate = Number(getAb(1098).toFixed(1));
+          stats.shockDebuffResist = Number(getAb(1103).toFixed(1));
+          stats.burnDebuffResist = Number(getAb(1105).toFixed(1));
+          stats.poisonDebuffResist = Number(getAb(1104).toFixed(1));
+          stats.allElementDmgResist = Number(getAb(1072).toFixed(1));
+          stats.lightningDmgResist = Number((getAb(1069) + getAb(1072)).toFixed(1));
+          stats.fireDmgResist = Number((getAb(1070) + getAb(1072)).toFixed(1));
+          stats.poisonDmgResist = Number((getAb(1071) + getAb(1072)).toFixed(1));
+          stats.allElementResist = Number(getAb(1080).toFixed(1));
+          stats.lightningResist = Number((getAb(1077) + getAb(1080) + getAb(1069) + getAb(1072)).toFixed(1));
+          stats.fireResist = Number((getAb(1078) + getAb(1080) + getAb(1070) + getAb(1072)).toFixed(1));
+          stats.poisonResist = Number((getAb(1079) + getAb(1080) + getAb(1071) + getAb(1072)).toFixed(1));
+          stats.fireDamage = Number(getAb(1037).toFixed(1));
+          stats.hitRate = Number(getAb(108).toFixed(1));
+          stats.evasion = Number(getAb(109).toFixed(1));
+
+          const mobExpFlat = Math.round(getAb(1117));
+          const bossExpFlat = Math.round(getAb(1119));
+          const mobExpPct = Math.round(getAb(1118));
+          const bossExpPct = Math.round(getAb(1120));
+          const allExpPct = Math.round(getAb(1121));
+          stats.monsterExpFlat = mobExpFlat;
+          stats.bossExpFlat = bossExpFlat;
+          stats.monsterExpBonusPct = mobExpPct + allExpPct;
+          stats.bossExpBonusPct = bossExpPct + allExpPct;
+          stats.allExpBonusPct = allExpPct;
+          stats.monsterExpBonus = stats.monsterExpBonusPct;
+          stats.bossExpBonus = stats.bossExpBonusPct;
+          stats.offlineExpBonusPct = Math.round(getAb(1123));
+
+          const mobGoldFlat = Math.round(getAb(1109));
+          const bossGoldFlat = Math.round(getAb(1111));
+          const mobGoldPct = Math.round(getAb(1110));
+          const bossGoldPct = Math.round(getAb(1112));
+          const allGoldPct = Math.round(getAb(1113));
+          stats.monsterGoldFlat = mobGoldFlat;
+          stats.bossGoldFlat = bossGoldFlat;
+          stats.monsterGoldBonusPct = mobGoldPct + allGoldPct;
+          stats.bossGoldBonusPct = bossGoldPct + allGoldPct;
+          stats.allGoldBonusPct = allGoldPct;
+          stats.monsterGoldBonus = stats.monsterGoldBonusPct;
+          stats.bossGoldBonus = stats.bossGoldBonusPct;
+          stats.offlineGoldBonusPct = Math.round(getAb(1115));
+          stats.goldStorageLimit = Math.round(getAb(1116));
+
+          const mobDrop = Math.round(getAb(1127));
+          const bossDrop = Math.round(getAb(1129));
+          const eqDrop = Math.round(getAb(1130));
+          stats.equipDropRatePct = eqDrop;
+          stats.monsterDropRatePct = mobDrop + eqDrop;
+          stats.bossDropRatePct = bossDrop + eqDrop;
+          stats.monsterBaseDropRatePct = mobDrop;
+          stats.bossBaseDropRatePct = bossDrop;
+          stats.monsterDropIntervalReduction = Number(getAb(1125).toFixed(1));
+          stats.bossSummonKillReduction = Math.round(getAb(1131));
         } else if (sContent && sContent.getValue) {
           stats.finalAttack = sContent.getValue(101) || 1337.6;
           stats.finalDefense = sContent.getValue(102) || 2219.9;
@@ -22200,7 +22271,8 @@ function _doRenderSmartAnalysis() {
   const renderKey = JSON.stringify([
     s.level, s.combatPower, Math.round(s.totalDps), s.gold, s.diamond, s.exp,
     (s.skillOptimizations || []).map(o => [o.groupId, o.currentLv, Math.round(o.curDps), Math.round(o.dpsDelta)]),
-    s.stuckAnalysis ? [s.stuckAnalysis.stageId, s.stuckAnalysis.failCount] : []
+    s.stuckAnalysis ? [s.stuckAnalysis.stageId, s.stuckAnalysis.failCount] : [],
+    s.charStats ? Object.keys(s.charStats).length + '_' + (s.charStats.lightningHitRate ?? '') + '_' + (s.charStats.critRateResist ?? '') + '_' + (s.charStats.stunDurationReduction ?? '') : ''
   ]);
   if (window.__lastSmartAnalysisRenderKey === renderKey && el.children.length > 0) {
     return;
@@ -22373,37 +22445,180 @@ function _doRenderSmartAnalysis() {
 
   html += renderAnalysisCard('🛡️', 'Chẩn Đoán Leo Ải & Kẹt Ải', '#bc8cff', stageRows, stageAlert);
 
-  // ---- CARD 6: THÔNG SỐ CHI TIẾT NHÂN VẬT (Real-time from profile.stats) ----
+  // ---- CARD 6: THÔNG SỐ CHI TIẾT NHÂN VẬT (Chuẩn In-Game: Tấn Công, Phòng Thủ, Buff) ----
   const cs = s.charStats;
-  const statRows = [];
   if (cs && Object.keys(cs).length > 0) {
-    statRows.push({ type: 'header', text: '⚔️ Chỉ Số Tấn Công' });
-    if (cs.finalAttack !== undefined) statRows.push({ type: 'stat_row', icon: '🗡️', label: 'Tấn Công (Atk)', value: fmtNum(Number(cs.finalAttack)), rawVal: Number(cs.finalAttack), max: 50000, barColor: '#f0883e', valColor: '#f0883e' });
-    if (cs.finalAttackSpeed !== undefined) statRows.push({ type: 'stat_row', icon: '⚡', label: 'Tốc Đánh (Atk Spd)', value: Number(cs.finalAttackSpeed).toFixed(1) + '%', rawVal: Number(cs.finalAttackSpeed), max: 200, barColor: '#7ee787', valColor: '#7ee787' });
-    if (cs.finalCriticalRate !== undefined) statRows.push({ type: 'stat_row', icon: '🎯', label: 'Tỉ lệ Chí Mạng', value: Number(cs.finalCriticalRate).toFixed(1) + '%', rawVal: Number(cs.finalCriticalRate), max: 100, barColor: '#f2cc60', valColor: '#f2cc60' });
-    if (cs.finalCriticalDamage !== undefined) statRows.push({ type: 'stat_row', icon: '💥', label: 'ST Chí Mạng', value: Number(cs.finalCriticalDamage).toFixed(1) + '%', rawVal: Number(cs.finalCriticalDamage), max: 500, barColor: '#f0883e', valColor: '#f0883e' });
-    if (cs.damageBonus !== undefined) statRows.push({ type: 'stat_row', icon: '📈', label: 'Bonus Sát Thương', value: '+' + Number(cs.damageBonus).toFixed(1) + '%', rawVal: Number(cs.damageBonus), max: 100, barColor: '#58a6ff', valColor: '#58a6ff' });
-    if (cs.pveBonus !== undefined) statRows.push({ type: 'stat_row', icon: '🏟️', label: 'Bonus PvE', value: '+' + Number(cs.pveBonus).toFixed(1) + '%', rawVal: Number(cs.pveBonus), max: 100, barColor: '#7ee787', valColor: '#7ee787' });
-    if (cs.bossBonus !== undefined) statRows.push({ type: 'stat_row', icon: '👑', label: 'Bonus Boss', value: '+' + Number(cs.bossBonus).toFixed(1) + '%', rawVal: Number(cs.bossBonus), max: 100, barColor: '#bc8cff', valColor: '#bc8cff' });
+    const atkRows = [];
+    atkRows.push({ type: 'header', text: '🗡️ Sát Thương Cơ Bản & Bạo Kích' });
+    if (cs.finalAttack !== undefined) atkRows.push({ type: 'stat_row', icon: '🗡️', label: 'Tấn Công (Atk)', value: fmtNum(Number(cs.finalAttack)), rawVal: Number(cs.finalAttack), max: 50000, barColor: '#f0883e', valColor: '#f0883e' });
+    if (cs.finalAttackSpeed !== undefined) atkRows.push({ type: 'stat_row', icon: '⚡', label: 'Tốc Đánh (Atk Spd)', value: Number(cs.finalAttackSpeed).toFixed(1) + '%', rawVal: Number(cs.finalAttackSpeed), max: 200, barColor: '#7ee787', valColor: '#7ee787' });
+    if (cs.finalCriticalRate !== undefined) atkRows.push({ type: 'stat_row', icon: '🎯', label: 'Tỉ Lệ Chí Mạng', value: Number(cs.finalCriticalRate).toFixed(1) + '%', rawVal: Number(cs.finalCriticalRate), max: 100, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if (cs.finalCriticalDamage !== undefined) atkRows.push({ type: 'stat_row', icon: '💥', label: 'ST Chí Mạng', value: Number(cs.finalCriticalDamage).toFixed(1) + '%', rawVal: Number(cs.finalCriticalDamage), max: 500, barColor: '#f0883e', valColor: '#f0883e' });
+    if (cs.damageBonus !== undefined) atkRows.push({ type: 'stat_row', icon: '📈', label: 'Tăng Sát Thương', value: '+' + Number(cs.damageBonus).toFixed(1) + '%', rawVal: Number(cs.damageBonus), max: 100, barColor: '#58a6ff', valColor: '#58a6ff' });
+    if (cs.finalDamageBonus !== undefined) atkRows.push({ type: 'stat_row', icon: '🌟', label: 'Sát Thương Cuối', value: '+' + Number(cs.finalDamageBonus).toFixed(1) + '%', rawVal: Number(cs.finalDamageBonus), max: 100, barColor: '#d2a8ff', valColor: '#d2a8ff' });
+    if (cs.bossBonus !== undefined) atkRows.push({ type: 'stat_row', icon: '👑', label: 'Sát Thương Boss', value: '+' + Number(cs.bossBonus).toFixed(1) + '%', rawVal: Number(cs.bossBonus), max: 100, barColor: '#bc8cff', valColor: '#bc8cff' });
+    if (cs.pveBonus !== undefined) atkRows.push({ type: 'stat_row', icon: '🏟️', label: 'Sức Tấn Công PvE', value: '+' + Number(cs.pveBonus).toFixed(1) + '%', rawVal: Number(cs.pveBonus), max: 100, barColor: '#7ee787', valColor: '#7ee787' });
+    if (cs.pveDamageDealt !== undefined) atkRows.push({ type: 'stat_row', icon: '⚔️', label: 'ST PvE Gây Ra', value: '+' + Number(cs.pveDamageDealt).toFixed(1) + '%', rawVal: Number(cs.pveDamageDealt), max: 100, barColor: '#56d364', valColor: '#56d364' });
+    if (cs.pvpBonus !== undefined) atkRows.push({ type: 'stat_row', icon: '🥊', label: 'Sức Tấn Công PvP', value: '+' + Number(cs.pvpBonus).toFixed(1) + '%', rawVal: Number(cs.pvpBonus), max: 100, barColor: '#e3b341', valColor: '#e3b341' });
+    if (cs.pvpDamageDealt !== undefined) atkRows.push({ type: 'stat_row', icon: '🤺', label: 'ST PvP Gây Ra', value: '+' + Number(cs.pvpDamageDealt).toFixed(1) + '%', rawVal: Number(cs.pvpDamageDealt), max: 100, barColor: '#e3b341', valColor: '#e3b341' });
 
-    statRows.push({ type: 'header', text: '🛡️ Chỉ Số Phòng Thủ' });
-    if (cs.finalDefense !== undefined) statRows.push({ type: 'stat_row', icon: '🛡️', label: 'Phòng Thủ (Def)', value: fmtNum(Number(cs.finalDefense)), rawVal: Number(cs.finalDefense), max: 20000, barColor: '#79c0ff', valColor: '#79c0ff' });
-    if (cs.finalHp !== undefined) statRows.push({ type: 'stat_row', icon: '❤️', label: 'Máu (HP)', value: fmtNum(Number(cs.finalHp)), rawVal: Number(cs.finalHp), max: 100000, barColor: '#f85149', valColor: '#f85149' });
-    if (cs.damageReduction !== undefined) statRows.push({ type: 'stat_row', icon: '🔰', label: 'Giảm ST nhận vào', value: Number(cs.damageReduction).toFixed(0) + '%', rawVal: Number(cs.damageReduction), max: 80, barColor: '#2ea043', valColor: '#2ea043' });
-    if (cs.pveDefense !== undefined) statRows.push({ type: 'stat_row', icon: '⚔️', label: 'Kháng PvE', value: Number(cs.pveDefense).toFixed(1) + '%', rawVal: Number(cs.pveDefense), max: 80, barColor: '#58a6ff', valColor: '#58a6ff' });
-    if (cs.critDmgResist !== undefined) statRows.push({ type: 'stat_row', icon: '💠', label: 'Kháng ST Chí Mạng', value: Number(cs.critDmgResist).toFixed(1) + '%', rawVal: Number(cs.critDmgResist), max: 80, barColor: '#79c0ff', valColor: '#79c0ff' });
+    atkRows.push({ type: 'header', text: '⚡ Kích Hoạt Nguyên Tố & Choáng' });
+    if ((cs.lightningHitRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '⚡', label: 'Tỷ Lệ Kích Hoạt Sét', value: '+' + Number(cs.lightningHitRate).toFixed(1) + '%', rawVal: Number(cs.lightningHitRate), max: 100, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if ((cs.fireHitRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '🔥', label: 'Tỷ Lệ Kích Hoạt Lửa', value: '+' + Number(cs.fireHitRate).toFixed(1) + '%', rawVal: Number(cs.fireHitRate), max: 100, barColor: '#ff7b72', valColor: '#ff7b72' });
+    if ((cs.poisonHitRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '🐍', label: 'Tỷ Lệ Kích Hoạt Độc', value: '+' + Number(cs.poisonHitRate).toFixed(1) + '%', rawVal: Number(cs.poisonHitRate), max: 100, barColor: '#2ea043', valColor: '#2ea043' });
+    if ((cs.stunHitRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '💫', label: 'Tỷ Lệ Choáng (Trúng Đích)', value: '+' + Number(cs.stunHitRate).toFixed(1) + '%', rawVal: Number(cs.stunHitRate), max: 100, barColor: '#e3b341', valColor: '#e3b341' });
 
-    statRows.push({ type: 'header', text: '✨ Chỉ Số Đặc Biệt' });
-    if (cs.skillCooldownReduction !== undefined) statRows.push({ type: 'stat_row', icon: '⏱️', label: 'Giảm Thời Gian Hồi', value: Number(cs.skillCooldownReduction).toFixed(0) + '%', rawVal: Number(cs.skillCooldownReduction), max: 50, barColor: '#bc8cff', valColor: '#bc8cff' });
-    if (cs.ignoreBlock !== undefined) statRows.push({ type: 'stat_row', icon: '🚫', label: 'Xuyên Phá (Ignore Block)', value: Number(cs.ignoreBlock).toFixed(0) + '%', rawVal: Number(cs.ignoreBlock), max: 100, barColor: '#f0883e', valColor: '#f0883e' });
-    if (cs.moveSpeed !== undefined) statRows.push({ type: 'stat_row', icon: '💨', label: 'Tốc Độ Di Chuyển', value: Number(cs.moveSpeed).toFixed(0), rawVal: Number(cs.moveSpeed), max: 500, barColor: '#7ee787', valColor: '#7ee787' });
-    if (cs.lightningDamage !== undefined) statRows.push({ type: 'stat_row', icon: '⚡', label: 'Sát Thương Sét', value: '+' + Number(cs.lightningDamage).toFixed(1) + '%', rawVal: Number(cs.lightningDamage), max: 30, barColor: '#f2cc60', valColor: '#f2cc60' });
-    if (cs.poisonDamage !== undefined) statRows.push({ type: 'stat_row', icon: '🐍', label: 'Sát Thương Độc', value: '+' + Number(cs.poisonDamage).toFixed(1) + '%', rawVal: Number(cs.poisonDamage), max: 50, barColor: '#2ea043', valColor: '#2ea043' });
-    if (cs.naturalRecovery !== undefined) statRows.push({ type: 'stat_row', icon: '💚', label: 'Hồi Máu Tự Nhiên', value: fmtNum(Number(cs.naturalRecovery)) + '/s', rawVal: Number(cs.naturalRecovery), max: 500, barColor: '#2ea043', valColor: '#2ea043' });
+    atkRows.push({ type: 'header', text: '🧪 Sát Thương & Tỷ Lệ Gây Hiệu Ứng' });
+    if (cs.lightningDamage !== undefined) atkRows.push({ type: 'stat_row', icon: '⚡', label: 'Sát Thương Sét', value: '+' + Number(cs.lightningDamage).toFixed(1) + '%', rawVal: Number(cs.lightningDamage), max: 100, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if ((cs.shockDebuffRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '⚡', label: 'Tỷ Lệ Điện Giật', value: '+' + Number(cs.shockDebuffRate).toFixed(1) + '%', rawVal: Number(cs.shockDebuffRate), max: 100, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if (cs.fireDamage !== undefined) atkRows.push({ type: 'stat_row', icon: '🔥', label: 'Sát Thương Lửa', value: '+' + Number(cs.fireDamage).toFixed(1) + '%', rawVal: Number(cs.fireDamage), max: 100, barColor: '#ff7b72', valColor: '#ff7b72' });
+    if ((cs.burnDebuffRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '🔥', label: 'Tỷ Lệ Thiêu Đốt', value: '+' + Number(cs.burnDebuffRate).toFixed(1) + '%', rawVal: Number(cs.burnDebuffRate), max: 100, barColor: '#ff7b72', valColor: '#ff7b72' });
+    if (cs.poisonDamage !== undefined) atkRows.push({ type: 'stat_row', icon: '🐍', label: 'Sát Thương Độc', value: '+' + Number(cs.poisonDamage).toFixed(1) + '%', rawVal: Number(cs.poisonDamage), max: 100, barColor: '#2ea043', valColor: '#2ea043' });
+    if ((cs.poisonDebuffRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '🧪', label: 'Tỷ Lệ Trúng Độc', value: '+' + Number(cs.poisonDebuffRate).toFixed(1) + '%', rawVal: Number(cs.poisonDebuffRate), max: 100, barColor: '#2ea043', valColor: '#2ea043' });
+
+    atkRows.push({ type: 'header', text: '🎯 Xuyên & Đòn Trúng' });
+    if (cs.ignoreBlock !== undefined) atkRows.push({ type: 'stat_row', icon: '🚫', label: 'Bỏ Qua Đỡ Đòn (Xuyên)', value: '+' + Number(cs.ignoreBlock).toFixed(0) + '%', rawVal: Number(cs.ignoreBlock), max: 100, barColor: '#f0883e', valColor: '#f0883e' });
+    if ((cs.hitRate ?? 0) > 0) atkRows.push({ type: 'stat_row', icon: '👁️', label: 'Đòn Trúng Đích', value: '+' + Number(cs.hitRate).toFixed(1) + '%', rawVal: Number(cs.hitRate), max: 100, barColor: '#79c0ff', valColor: '#79c0ff' });
+
+    const defRows = [];
+    defRows.push({ type: 'header', text: '🛡️ Sinh Lực & Giảm Sát Thương' });
+    if (cs.finalDefense !== undefined) defRows.push({ type: 'stat_row', icon: '🛡️', label: 'Phòng Thủ (Def)', value: fmtNum(Number(cs.finalDefense)), rawVal: Number(cs.finalDefense), max: 30000, barColor: '#79c0ff', valColor: '#79c0ff' });
+    if (cs.finalHp !== undefined) defRows.push({ type: 'stat_row', icon: '❤️', label: 'Máu Tối Đa (HP)', value: fmtNum(Number(cs.finalHp)), rawVal: Number(cs.finalHp), max: 100000, barColor: '#f85149', valColor: '#f85149' });
+    if (cs.damageReduction !== undefined) defRows.push({ type: 'stat_row', icon: '🔰', label: 'Giảm ST Nhận Vào', value: Number(cs.damageReduction).toFixed(1) + '%', rawVal: Number(cs.damageReduction), max: 80, barColor: '#2ea043', valColor: '#2ea043' });
+    if (cs.finalDamageReduction !== undefined) defRows.push({ type: 'stat_row', icon: '💠', label: 'Giảm ST Cuối Nhận Vào', value: Number(cs.finalDamageReduction).toFixed(1) + '%', rawVal: Number(cs.finalDamageReduction), max: 80, barColor: '#56d364', valColor: '#56d364' });
+    if ((cs.critDmgResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '💎', label: 'Kháng ST Chí Mạng', value: Number(cs.critDmgResist).toFixed(1) + '%', rawVal: Number(cs.critDmgResist), max: 80, barColor: '#79c0ff', valColor: '#79c0ff' });
+    if ((cs.critRateResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '🛡️', label: 'Kháng Tỷ Lệ Chí Mạng', value: Number(cs.critRateResist).toFixed(1) + '%', rawVal: Number(cs.critRateResist), max: 80, barColor: '#388bfd', valColor: '#388bfd' });
+    if (cs.pveDefense !== undefined) defRows.push({ type: 'stat_row', icon: '🏰', label: 'Phòng Thủ PvE', value: Number(cs.pveDefense).toFixed(1) + '%', rawVal: Number(cs.pveDefense), max: 80, barColor: '#58a6ff', valColor: '#58a6ff' });
+    if (cs.pveDamageTakenReduction !== undefined) defRows.push({ type: 'stat_row', icon: '🔰', label: 'Giảm ST PvE Nhận Vào', value: Number(cs.pveDamageTakenReduction).toFixed(1) + '%', rawVal: Number(cs.pveDamageTakenReduction), max: 80, barColor: '#7ee787', valColor: '#7ee787' });
+    if (cs.pvpDefense !== undefined) defRows.push({ type: 'stat_row', icon: '🥊', label: 'Phòng Thủ PvP', value: Number(cs.pvpDefense).toFixed(1) + '%', rawVal: Number(cs.pvpDefense), max: 80, barColor: '#e3b341', valColor: '#e3b341' });
+    if (cs.pvpDamageTakenReduction !== undefined) defRows.push({ type: 'stat_row', icon: '🛡️', label: 'Giảm ST PvP Nhận Vào', value: Number(cs.pvpDamageTakenReduction).toFixed(1) + '%', rawVal: Number(cs.pvpDamageTakenReduction), max: 80, barColor: '#e3b341', valColor: '#e3b341' });
+    if (cs.blockRate !== undefined) defRows.push({ type: 'stat_row', icon: '🛑', label: 'Chặn / Đỡ Đòn', value: Number(cs.blockRate).toFixed(1) + '%', rawVal: Number(cs.blockRate), max: 80, barColor: '#f0883e', valColor: '#f0883e' });
+    if ((cs.evasion ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '👤', label: 'Né Tránh', value: Number(cs.evasion).toFixed(1) + '%', rawVal: Number(cs.evasion), max: 80, barColor: '#79c0ff', valColor: '#79c0ff' });
+
+    defRows.push({ type: 'header', text: '🔰 Kháng Sát Thương Nguyên Tố (%)' });
+    if ((cs.lightningDmgResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '⚡', label: 'Kháng Sát Thương Sét (%)', value: Number(cs.lightningDmgResist).toFixed(1) + '%', rawVal: Number(cs.lightningDmgResist), max: 80, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if ((cs.fireDmgResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '🔥', label: 'Kháng Sát Thương Lửa (%)', value: Number(cs.fireDmgResist).toFixed(1) + '%', rawVal: Number(cs.fireDmgResist), max: 80, barColor: '#ff7b72', valColor: '#ff7b72' });
+    if ((cs.poisonDmgResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '🧪', label: 'Kháng Sát Thương Độc (%)', value: Number(cs.poisonDmgResist).toFixed(1) + '%', rawVal: Number(cs.poisonDmgResist), max: 80, barColor: '#2ea043', valColor: '#2ea043' });
+    if ((cs.allElementDmgResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '✨', label: 'Kháng ST Tất Cả Nguyên Tố', value: Number(cs.allElementDmgResist).toFixed(1) + '%', rawVal: Number(cs.allElementDmgResist), max: 80, barColor: '#bc8cff', valColor: '#bc8cff' });
+    if (cs.lightningResist !== undefined) defRows.push({ type: 'stat_row', icon: '⚡', label: 'Kháng Sét Cơ Bản', value: Number(cs.lightningResist).toFixed(1) + '%', rawVal: Number(cs.lightningResist), max: 80, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if (cs.fireResist !== undefined) defRows.push({ type: 'stat_row', icon: '🔥', label: 'Kháng Lửa Cơ Bản', value: Number(cs.fireResist).toFixed(1) + '%', rawVal: Number(cs.fireResist), max: 80, barColor: '#ff7b72', valColor: '#ff7b72' });
+    if (cs.poisonResist !== undefined) defRows.push({ type: 'stat_row', icon: '🧪', label: 'Kháng Độc Cơ Bản', value: Number(cs.poisonResist).toFixed(1) + '%', rawVal: Number(cs.poisonResist), max: 80, barColor: '#2ea043', valColor: '#2ea043' });
+
+    defRows.push({ type: 'header', text: '💫 Kháng Hiệu Ứng & Giảm Choáng' });
+    if ((cs.stunDurationReduction ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '⏱️', label: 'Giảm Thời Gian Choáng', value: '-' + Number(cs.stunDurationReduction).toFixed(1) + '%', rawVal: Number(cs.stunDurationReduction), max: 50, barColor: '#bc8cff', valColor: '#bc8cff' });
+    if (cs.stunResist !== undefined) defRows.push({ type: 'stat_row', icon: '💫', label: 'Kháng Choáng', value: Number(cs.stunResist).toFixed(1) + '%', rawVal: Number(cs.stunResist), max: 80, barColor: '#e3b341', valColor: '#e3b341' });
+    if ((cs.shockDebuffResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '⚡', label: 'Kháng Dính Điện Giật', value: Number(cs.shockDebuffResist).toFixed(1) + '%', rawVal: Number(cs.shockDebuffResist), max: 80, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if ((cs.burnDebuffResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '🔥', label: 'Kháng Dính Thiêu Đốt', value: Number(cs.burnDebuffResist).toFixed(1) + '%', rawVal: Number(cs.burnDebuffResist), max: 80, barColor: '#ff7b72', valColor: '#ff7b72' });
+    if ((cs.poisonDebuffResist ?? 0) > 0) defRows.push({ type: 'stat_row', icon: '🧪', label: 'Kháng Dính Trúng Độc', value: Number(cs.poisonDebuffResist).toFixed(1) + '%', rawVal: Number(cs.poisonDebuffResist), max: 80, barColor: '#2ea043', valColor: '#2ea043' });
+
+    defRows.push({ type: 'header', text: '⏱️ Phục Hồi & Cơ Động' });
+    if (cs.naturalRecovery !== undefined) defRows.push({ type: 'stat_row', icon: '💚', label: 'Hồi Phục Tự Nhiên', value: fmtNum(Number(cs.naturalRecovery)) + '/s' + (cs.naturalRecoveryPct ? (' (' + Number(cs.naturalRecoveryPct).toFixed(0) + '%)') : ''), rawVal: Number(cs.naturalRecovery), max: 500, barColor: '#2ea043', valColor: '#2ea043' });
+    if (cs.skillCooldownReduction !== undefined) defRows.push({ type: 'stat_row', icon: '⏱️', label: 'Giảm Hồi Chiêu Kỹ Năng', value: Number(cs.skillCooldownReduction).toFixed(0) + '%', rawVal: Number(cs.skillCooldownReduction), max: 50, barColor: '#bc8cff', valColor: '#bc8cff' });
+    if (cs.moveSpeed !== undefined) defRows.push({ type: 'stat_row', icon: '💨', label: 'Tốc Độ Di Chuyển', value: Number(cs.moveSpeed).toFixed(0), rawVal: Number(cs.moveSpeed), max: 500, barColor: '#7ee787', valColor: '#7ee787' });
+
+    const buffRows = [];
+    buffRows.push({ type: 'header', text: '🎁 Buff Tỷ Lệ Rơi Đồ (Drop Rate)' });
+    if (cs.monsterDropRatePct !== undefined) buffRows.push({ type: 'stat_row', icon: '🎁', label: 'Tỷ Lệ Rơi Đồ Quái', value: '+' + Number(cs.monsterDropRatePct).toFixed(0) + '%', rawVal: Number(cs.monsterDropRatePct), max: 100, barColor: '#7ee787', valColor: '#7ee787' });
+    if (cs.bossDropRatePct !== undefined) buffRows.push({ type: 'stat_row', icon: '👑', label: 'Tỷ Lệ Rơi Đồ Boss', value: '+' + Number(cs.bossDropRatePct).toFixed(0) + '%', rawVal: Number(cs.bossDropRatePct), max: 100, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if (cs.equipDropRatePct !== undefined) buffRows.push({ type: 'stat_row', icon: '📦', label: 'Tỷ Lệ Rơi Trang Bị', value: '+' + Number(cs.equipDropRatePct).toFixed(0) + '%', rawVal: Number(cs.equipDropRatePct), max: 100, barColor: '#58a6ff', valColor: '#58a6ff' });
+    if (cs.monsterDropIntervalReduction !== undefined) buffRows.push({ type: 'stat_row', icon: '⏱️', label: 'Giảm Chu Kỳ Rơi Đồ Quái', value: '-' + Number(cs.monsterDropIntervalReduction).toFixed(1) + '%', rawVal: Number(cs.monsterDropIntervalReduction), max: 50, barColor: '#bc8cff', valColor: '#bc8cff' });
+    if (cs.bossSummonKillReduction !== undefined) buffRows.push({ type: 'stat_row', icon: '🎯', label: 'Giảm Quái Triệu Hồi Boss', value: '-' + Number(cs.bossSummonKillReduction) + ' quái', rawVal: Number(cs.bossSummonKillReduction), max: 50, barColor: '#f0883e', valColor: '#f0883e' });
+
+    buffRows.push({ type: 'header', text: '🪙 Buff Vàng (Gold)' });
+    const mobGold = cs.monsterGoldBonusPct !== undefined ? cs.monsterGoldBonusPct : cs.monsterGoldBonus;
+    if (mobGold !== undefined) buffRows.push({ type: 'stat_row', icon: '🪙', label: 'Vàng từ Quái (%)', value: '+' + Number(mobGold).toFixed(0) + '%', rawVal: Number(mobGold), max: 200, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if (cs.monsterGoldFlat !== undefined) buffRows.push({ type: 'stat_row', icon: '💰', label: 'Vàng từ Quái (Cố định)', value: '+' + fmtNum(Number(cs.monsterGoldFlat)), rawVal: Number(cs.monsterGoldFlat), max: 500, barColor: '#f2cc60', valColor: '#f2cc60' });
+    const bossGold = cs.bossGoldBonusPct !== undefined ? cs.bossGoldBonusPct : cs.bossGoldBonus;
+    if (bossGold !== undefined) buffRows.push({ type: 'stat_row', icon: '👑', label: 'Vàng từ Boss (%)', value: '+' + Number(bossGold).toFixed(0) + '%', rawVal: Number(bossGold), max: 200, barColor: '#e3b341', valColor: '#e3b341' });
+    if (cs.bossGoldFlat !== undefined) buffRows.push({ type: 'stat_row', icon: '🏆', label: 'Vàng từ Boss (Cố định)', value: '+' + fmtNum(Number(cs.bossGoldFlat)), rawVal: Number(cs.bossGoldFlat), max: 1000, barColor: '#e3b341', valColor: '#e3b341' });
+    if (cs.allGoldBonusPct !== undefined) buffRows.push({ type: 'stat_row', icon: '✨', label: 'Lượng Vàng Chung', value: '+' + Number(cs.allGoldBonusPct).toFixed(0) + '%', rawVal: Number(cs.allGoldBonusPct), max: 200, barColor: '#7ee787', valColor: '#7ee787' });
+    if (cs.offlineGoldBonusPct !== undefined) buffRows.push({ type: 'stat_row', icon: '🌙', label: 'Vàng Ngoại Tuyến', value: '+' + Number(cs.offlineGoldBonusPct).toFixed(0) + '%', rawVal: Number(cs.offlineGoldBonusPct), max: 100, barColor: '#f2cc60', valColor: '#f2cc60' });
+    if (cs.goldStorageLimit !== undefined) buffRows.push({ type: 'stat_row', icon: '🏦', label: 'Tăng Giới Hạn Lưu Trữ Vàng', value: '+' + fmtNum(Number(cs.goldStorageLimit)), rawVal: Number(cs.goldStorageLimit), max: 1000000, barColor: '#79c0ff', valColor: '#79c0ff' });
+
+    buffRows.push({ type: 'header', text: '📖 Buff Kinh Nghiệm (EXP)' });
+    const mobExp = cs.monsterExpBonusPct !== undefined ? cs.monsterExpBonusPct : cs.monsterExpBonus;
+    if (mobExp !== undefined) buffRows.push({ type: 'stat_row', icon: '📖', label: 'EXP từ Quái (%)', value: '+' + Number(mobExp).toFixed(0) + '%', rawVal: Number(mobExp), max: 200, barColor: '#58a6ff', valColor: '#58a6ff' });
+    if (cs.monsterExpFlat !== undefined) buffRows.push({ type: 'stat_row', icon: '📜', label: 'EXP từ Quái (Cố định)', value: '+' + fmtNum(Number(cs.monsterExpFlat)), rawVal: Number(cs.monsterExpFlat), max: 500, barColor: '#79c0ff', valColor: '#79c0ff' });
+    const bossExp = cs.bossExpBonusPct !== undefined ? cs.bossExpBonusPct : cs.bossExpBonus;
+    if (bossExp !== undefined) buffRows.push({ type: 'stat_row', icon: '👑', label: 'EXP từ Boss (%)', value: '+' + Number(bossExp).toFixed(0) + '%', rawVal: Number(bossExp), max: 200, barColor: '#bc8cff', valColor: '#bc8cff' });
+    if (cs.bossExpFlat !== undefined) buffRows.push({ type: 'stat_row', icon: '🏆', label: 'EXP từ Boss (Cố định)', value: '+' + fmtNum(Number(cs.bossExpFlat)), rawVal: Number(cs.bossExpFlat), max: 1000, barColor: '#bc8cff', valColor: '#bc8cff' });
+    if (cs.allExpBonusPct !== undefined) buffRows.push({ type: 'stat_row', icon: '✨', label: 'Lượng EXP Chung', value: '+' + Number(cs.allExpBonusPct).toFixed(0) + '%', rawVal: Number(cs.allExpBonusPct), max: 200, barColor: '#7ee787', valColor: '#7ee787' });
+    if (cs.offlineExpBonusPct !== undefined) buffRows.push({ type: 'stat_row', icon: '🌙', label: 'EXP Ngoại Tuyến', value: '+' + Number(cs.offlineExpBonusPct).toFixed(0) + '%', rawVal: Number(cs.offlineExpBonusPct), max: 100, barColor: '#58a6ff', valColor: '#58a6ff' });
+
+    function _renderStatSubrows(rows, themeColor) {
+      const tc = themeColor || '#58a6ff';
+      return rows.map(r => {
+        if (r.type === 'header') {
+          return '<div class="stat-sub-section" style="display:flex; align-items:center; gap:6px; font-size:11px; font-weight:700; color:#8b949e; text-transform:uppercase; letter-spacing:0.6px; margin:14px 0 6px; padding:5px 8px; background:rgba(255,255,255,0.03); border-radius:6px; border-left:3px solid ' + tc + ';">' +
+            '<span>' + r.text + '</span>' +
+          '</div>';
+        }
+        if (r.type === 'stat_row') {
+          const barPct = r.max ? Math.min(100, Math.max(0, (r.rawVal / r.max * 100))) : 0;
+          const barColor = r.barColor || tc;
+          return '<div style="margin:4px 0; padding:3px 6px; border-radius:6px; transition:background 0.15s ease;" onmouseenter="this.style.background=\'rgba(255,255,255,0.04)\'" onmouseleave="this.style.background=\'transparent\'">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; margin-bottom:2px;">' +
+              '<span style="color:#c9d1d9; display:flex; align-items:center; gap:6px;"><span style="opacity:0.9;">' + (r.icon||'') + '</span> ' + r.label + '</span>' +
+              '<span style="font-variant-numeric: tabular-nums; font-weight:700; color:' + (r.valColor||'#f0f6fc') + '; font-size:12.5px;">' + r.value + '</span>' +
+            '</div>' +
+            (r.max ? '<div style="background:rgba(255,255,255,0.06); border-radius:2px; height:3px; overflow:hidden; margin-top:2px;"><div style="width:' + barPct.toFixed(1) + '%; height:100%; border-radius:2px; background:linear-gradient(90deg, ' + barColor + '99 0%, ' + barColor + ' 100%); transition:width 0.3s ease;"></div></div>' : '') +
+          '</div>';
+        }
+        const valColor = r.valColor || '#f0f6fc';
+        return '<div style="display:flex; justify-content:space-between; align-items:center; padding:4px 6px; border-radius:6px; font-size:12px; margin:2px 0; transition:background 0.15s ease;" onmouseenter="this.style.background=\'rgba(255,255,255,0.04)\'" onmouseleave="this.style.background=\'transparent\'">' +
+          '<span style="color:#8b949e; display:flex; align-items:center; gap:6px;"><span>' + (r.icon||'') + '</span> ' + r.label + '</span>' +
+          '<span style="font-variant-numeric: tabular-nums; color:' + valColor + '; font-weight:700;">' + r.value + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    html += '<div style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(22, 27, 34, 0.85) 0%, rgba(13, 17, 23, 0.95) 100%); border: 1px solid rgba(56, 139, 253, 0.25); border-radius: 14px; padding: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(56, 139, 253, 0.08);">' +
+      '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px; padding-bottom:12px; border-bottom:1px solid rgba(48,54,61,0.5);">' +
+        '<div style="display:flex; align-items:center; gap:10px;">' +
+          '<div style="width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, rgba(56,139,253,0.2) 0%, rgba(188,140,255,0.2) 100%); display:flex; align-items:center; justify-content:center; border:1px solid rgba(56,139,253,0.3); font-size:20px;">📊</div>' +
+          '<div>' +
+            '<div style="display:flex; align-items:center; gap:8px;">' +
+              '<b style="color:#f0f6fc; font-size:16px; letter-spacing:0.3px;">Thông Số Chi Tiết Nhân Vật</b>' +
+              '<span style="font-size:11px; color:#58a6ff; background:rgba(56,139,253,0.15); border:1px solid rgba(56,139,253,0.3); border-radius:10px; padding:2px 8px; font-weight:700;">Chuẩn In-Game</span>' +
+            '</div>' +
+            '<div style="font-size:11.5px; color:#8b949e; margin-top:2px;">Đồng bộ dữ liệu thời gian thực từ <code>ServiceContentState</code></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="stat-category-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:16px;">' +
+        '<div style="background:linear-gradient(180deg, rgba(240,136,62,0.06) 0%, rgba(22,27,34,0.75) 100%); border:1px solid rgba(240,136,62,0.25); border-radius:10px; padding:16px; box-shadow:0 4px 16px rgba(0,0,0,0.25);">' +
+          '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(240,136,62,0.25);">' +
+            '<div style="display:flex; align-items:center; gap:8px;">' +
+              '<span style="font-size:18px;">⚔️</span><b style="color:#f0883e; font-size:14.5px; letter-spacing:0.3px;">Chỉ Số Tấn Công</b>' +
+            '</div>' +
+            '<span style="font-size:11px; color:#f0883e; background:rgba(240,136,62,0.12); border:1px solid rgba(240,136,62,0.25); border-radius:6px; padding:2px 8px; font-weight:600;">Sát Thương & Kích Hoạt</span>' +
+          '</div>' +
+          _renderStatSubrows(atkRows, '#f0883e') +
+        '</div>' +
+        '<div style="background:linear-gradient(180deg, rgba(88,166,255,0.06) 0%, rgba(22,27,34,0.75) 100%); border:1px solid rgba(88,166,255,0.25); border-radius:10px; padding:16px; box-shadow:0 4px 16px rgba(0,0,0,0.25);">' +
+          '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(88,166,255,0.25);">' +
+            '<div style="display:flex; align-items:center; gap:8px;">' +
+              '<span style="font-size:18px;">🛡️</span><b style="color:#79c0ff; font-size:14.5px; letter-spacing:0.3px;">Chỉ Số Phòng Thủ</b>' +
+            '</div>' +
+            '<span style="font-size:11px; color:#79c0ff; background:rgba(88,166,255,0.12); border:1px solid rgba(88,166,255,0.25); border-radius:6px; padding:2px 8px; font-weight:600;">Chống Đỡ & Kháng ST</span>' +
+          '</div>' +
+          _renderStatSubrows(defRows, '#58a6ff') +
+        '</div>' +
+        '<div style="background:linear-gradient(180deg, rgba(242,204,96,0.06) 0%, rgba(22,27,34,0.75) 100%); border:1px solid rgba(242,204,96,0.25); border-radius:10px; padding:16px; box-shadow:0 4px 16px rgba(0,0,0,0.25);">' +
+          '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(242,204,96,0.25);">' +
+            '<div style="display:flex; align-items:center; gap:8px;">' +
+              '<span style="font-size:18px;">✨</span><b style="color:#f2cc60; font-size:14.5px; letter-spacing:0.3px;">Buff (EXP, Vàng & Rơi Đồ)</b>' +
+            '</div>' +
+            '<span style="font-size:11px; color:#f2cc60; background:rgba(242,204,96,0.12); border:1px solid rgba(242,204,96,0.25); border-radius:6px; padding:2px 8px; font-weight:600;">Tài Nguyên & Tỷ Lệ Rơi</span>' +
+          '</div>' +
+          _renderStatSubrows(buffRows, '#f2cc60') +
+        '</div>' +
+      '</div>' +
+    '</div>';
   } else {
-    statRows.push({ label: '⚠️ Chưa có chỉ số nhân vật', value: 'Đồng bộ dữ liệu từ game để xem', valColor: '#8b949e' });
+    const emptyRows = [{ label: '⚠️ Chưa có chỉ số nhân vật', value: 'Đồng bộ dữ liệu từ game để xem', valColor: '#8b949e' }];
+    html += renderAnalysisCard('📊', 'Thông Số Chi Tiết Nhân Vật', '#79c0ff', emptyRows, 'neutral');
   }
-  html += renderAnalysisCard('📊', 'Thông Số Chi Tiết Nhân Vật', '#79c0ff', statRows, cs && cs.finalAttack ? 'good' : 'neutral');
 
   html += '</div>';
   html += '<div style="text-align:center; font-size:12px; color:#484f58; margin-top:16px;">⚡ Dữ liệu được tính toán và phân tích tự động theo thời gian thực từ game Genesis.exe · Bấm <b>🔄 Làm Mới Phân Tích</b> để cập nhật</div>';
@@ -24448,12 +24663,60 @@ function renderJewelPreserveSettings() {
 
   const iconMap = (typeof skillIconsBase64 !== 'undefined' ? skillIconsBase64 : (window.skillIconsBase64 || {}));
 
-  const catOrder = [
+  function renderSingleJewelCard(b) {
+    const isBaseChecked = autoFusePreservedJewelTypes.includes(b.id);
+    const isFullyChecked = isBaseChecked || [1, 2, 3, 4, 5, 6].every(t => autoFusePreservedJewelTypes.includes(b.id + t));
+    const hasAnyTierChecked = isBaseChecked || [1, 2, 3, 4, 5, 6].some(t => autoFusePreservedJewelTypes.includes(b.id + t));
+    const name = isEn ? b.name_en : b.name_vi;
+    const totalOwned = ownedBaseCountMap[b.id] || 0;
+    const iconSrc = iconMap && iconMap[b.icon] ? iconMap[b.icon] : '';
+
+    let cardHtml = '<div style="background:#161b22; border:1px solid ' + (hasAnyTierChecked ? 'rgba(126,231,135,0.4)' : '#30363d') + '; border-radius:8px; padding:10px 12px; transition:all 0.15s ease;">' +
+      '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">' +
+        '<div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onmouseenter="showJewelBuffTooltip(event, null, ' + b.id + ')" onmouseleave="hideJewelBuffTooltip()">' +
+          (iconSrc 
+            ? '<img src="' + iconSrc + '" alt="' + b.icon + '" style="width:40px; height:40px; border-radius:6px; object-fit:contain; background:#0d1117; border:1px solid ' + (hasAnyTierChecked ? '#2ea043' : '#30363d') + '; padding:2px; flex-shrink:0; box-shadow:' + (hasAnyTierChecked ? '0 0 8px rgba(46,160,67,0.4)' : 'none') + ';">' 
+            : '<div style="width:40px; height:40px; border-radius:6px; background:#0d1117; border:1px solid #30363d; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;">💎</div>') +
+          '<div>' +
+            '<div style="color:' + (hasAnyTierChecked ? '#7ee787' : '#f0f6fc') + '; font-weight:bold; font-size:13.5px; display:flex; align-items:center; gap:6px;">' +
+              name +
+              '<span style="font-size:11px; color:#8b949e; cursor:help;" title="' + getLangTextOr('Di chuột để xem thông tin buff qua các bậc') + '">ℹ️</span>' +
+            '</div>' +
+            '<div style="font-size:11.5px; color:' + (totalOwned > 0 ? '#58a6ff' : '#6e7681') + '; font-weight:' + (totalOwned > 0 ? 'bold' : 'normal') + '; margin-top:2px;">' +
+              getLangTextOr('Hiện có:') + ' ' + totalOwned + ' ' + getLangTextOr('viên') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<button type="button" onclick="toggleJewelTypePreservation(' + b.id + ')" style="background:' + (isFullyChecked ? '#238636' : '#21262d') + '; border:1px solid ' + (isFullyChecked ? '#2ea043' : '#30363d') + '; color:' + (isFullyChecked ? '#fff' : '#c9d1d9') + '; border-radius:5px; font-size:11px; font-weight:bold; padding:3px 8px; cursor:pointer;" title="' + getLangTextOr('Bật/tắt giữ toàn bộ bậc ngọc này') + '">' +
+            (isFullyChecked ? getLangTextOr('✓ Giữ hết') : getLangTextOr('Giữ tất cả')) +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:6px;">';
+
+    for (let t = 1; t <= 6; t++) {
+      const isTierPreserved = isBaseChecked || autoFusePreservedJewelTypes.includes(b.id + t);
+      const tierCount = ownedTierCountMap[b.id + t] || 0;
+      const tStyle = getTierStyle(t);
+      const tColor = tStyle.color || '#58a6ff';
+
+      cardHtml += '<button type="button" onclick="toggleJewelTierPreservation(' + b.id + ', ' + t + ')" onmouseenter="showJewelBuffTooltip(event, ' + (b.id + t) + ')" onmouseleave="hideJewelBuffTooltip()" style="background:' + (isTierPreserved ? 'rgba(46,160,67,0.25)' : '#0d1117') + '; border:' + (isTierPreserved ? '1.5px solid #3fb950' : '1px solid #30363d') + '; color:' + (isTierPreserved ? '#7ee787' : tColor) + '; border-radius:6px; padding:4px 0; font-size:11.5px; font-weight:bold; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; transition:all 0.15s ease; box-shadow:' + (isTierPreserved ? '0 0 6px rgba(46,160,67,0.3)' : 'none') + '; font-variant-numeric:tabular-nums;">' +
+        '<span>' + (isTierPreserved ? '🛡️ ' : '') + 'T' + t + '</span>' +
+        '<span style="font-size:10px; opacity:' + (tierCount > 0 ? '1' : '0.45') + '; color:' + (tierCount > 0 ? '#58a6ff' : '#8b949e') + ';">' + tierCount + '</span>' +
+      '</button>';
+    }
+
+    cardHtml += '</div></div>';
+    return cardHtml;
+  }
+
+  const row1Cats = [
     { key_vi: 'Ngọc Vũ Khí', key_en: 'Weapon Jewel', title_vi: '⚔️ Ngọc Vũ Khí (Strife, Destruction, Elements)', title_en: '⚔️ Weapon Jewels (Strife, Destruction, Elements)' },
     { key_vi: 'Ngọc Giáp', key_en: 'Armor Jewel', title_vi: '🛡️ Ngọc Giáp (Fortitude, Life, Resistance)', title_en: '🛡️ Armor Jewels (Fortitude, Life, Resistance)' },
-    { key_vi: 'Ngọc Phụ Kiện', key_en: 'Accessory Jewel', title_vi: '💍 Ngọc Phụ Kiện (Valor, Wildness, Arcana, Wind, Steel, Magic Res)', title_en: '💍 Accessory Jewels (Valor, Wildness, Arcana, Wind, Steel, Magic Res)' },
     { key_vi: 'Ngọc Mana / Bổ Trợ', key_en: 'Mana Jewel', title_vi: '✨ Ngọc Mana & Bổ Trợ (Luck, Abundance)', title_en: '✨ Mana & Support Jewels (Luck, Abundance)' }
   ];
+  const accCat = { key_vi: 'Ngọc Phụ Kiện', key_en: 'Accessory Jewel', title_vi: '💍 Ngọc Phụ Kiện (Valor, Wildness, Arcana, Wind, Steel, Magic Res)', title_en: '💍 Accessory Jewels (Valor, Wildness, Arcana, Wind, Steel, Magic Res)' };
 
   let resHtml = '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; background:#161b22; border:1px solid #30363d; border-radius:8px; padding:10px 14px;">' +
     '<div>' +
@@ -24472,72 +24735,45 @@ function renderJewelPreserveSettings() {
     '</div>' +
   '</div>';
 
-  resHtml += '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:14px;">';
-
-  for (const cat of catOrder) {
+  // Row 1: 3 columns (Vũ Khí, Giáp, Mana)
+  resHtml += '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:14px; margin-bottom:14px;">';
+  for (const cat of row1Cats) {
     const catItems = baseTypes.filter(b => (b.category_vi === cat.key_vi || b.category_en === cat.key_en));
     if (catItems.length === 0) continue;
 
     resHtml += '<div style="background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; gap:10px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">' +
       '<div style="font-size:13px; font-weight:bold; color:#e3b341; border-bottom:1px solid #21262d; padding-bottom:6px; display:flex; justify-content:space-between; align-items:center;">' +
         '<span>' + getLangTextOr(cat.title_vi) + '</span>' +
-        '<span style="font-size:11px; color:#8b949e; font-weight:normal;">' + catItems.length + ' loại</span>' +
+        '<span style="font-size:11px; color:#8b949e; font-weight:normal;">' + catItems.length + ' ' + (isEn ? 'types' : 'loại') + '</span>' +
       '</div>' +
       '<div style="display:flex; flex-direction:column; gap:10px;">';
 
     for (const b of catItems) {
-      const isBaseChecked = autoFusePreservedJewelTypes.includes(b.id);
-      const isFullyChecked = isBaseChecked || [1, 2, 3, 4, 5, 6].every(t => autoFusePreservedJewelTypes.includes(b.id + t));
-      const hasAnyTierChecked = isBaseChecked || [1, 2, 3, 4, 5, 6].some(t => autoFusePreservedJewelTypes.includes(b.id + t));
-      const name = isEn ? b.name_en : b.name_vi;
-      const totalOwned = ownedBaseCountMap[b.id] || 0;
-      const iconSrc = iconMap && iconMap[b.icon] ? iconMap[b.icon] : '';
+      resHtml += renderSingleJewelCard(b);
+    }
 
-      resHtml += '<div style="background:#161b22; border:1px solid ' + (hasAnyTierChecked ? 'rgba(126,231,135,0.4)' : '#30363d') + '; border-radius:8px; padding:10px 12px; transition:all 0.15s ease;">' +
-        '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">' +
-          '<div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onmouseenter="showJewelBuffTooltip(event, null, ' + b.id + ')" onmouseleave="hideJewelBuffTooltip()">' +
-            (iconSrc 
-              ? '<img src="' + iconSrc + '" alt="' + b.icon + '" style="width:40px; height:40px; border-radius:6px; object-fit:contain; background:#0d1117; border:1px solid ' + (hasAnyTierChecked ? '#2ea043' : '#30363d') + '; padding:2px; flex-shrink:0; box-shadow:' + (hasAnyTierChecked ? '0 0 8px rgba(46,160,67,0.4)' : 'none') + ';">' 
-              : '<div style="width:40px; height:40px; border-radius:6px; background:#0d1117; border:1px solid #30363d; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;">💎</div>') +
-            '<div>' +
-              '<div style="color:' + (hasAnyTierChecked ? '#7ee787' : '#f0f6fc') + '; font-weight:bold; font-size:13.5px; display:flex; align-items:center; gap:6px;">' +
-                name +
-                '<span style="font-size:11px; color:#8b949e; cursor:help;" title="' + getLangTextOr('Di chuột để xem thông tin buff qua các bậc') + '">ℹ️</span>' +
-              '</div>' +
-              '<div style="font-size:11.5px; color:' + (totalOwned > 0 ? '#58a6ff' : '#6e7681') + '; font-weight:' + (totalOwned > 0 ? 'bold' : 'normal') + '; margin-top:2px;">' +
-                getLangTextOr('Hiện có:') + ' ' + totalOwned + ' ' + getLangTextOr('viên') +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div>' +
-            '<button type="button" onclick="toggleJewelTypePreservation(' + b.id + ')" style="background:' + (isFullyChecked ? '#238636' : '#21262d') + '; border:1px solid ' + (isFullyChecked ? '#2ea043' : '#30363d') + '; color:' + (isFullyChecked ? '#fff' : '#c9d1d9') + '; border-radius:5px; font-size:11px; font-weight:bold; padding:3px 8px; cursor:pointer;" title="' + getLangTextOr('Bật/tắt giữ toàn bộ bậc ngọc này') + '">' +
-              (isFullyChecked ? getLangTextOr('✓ Giữ hết') : getLangTextOr('Giữ tất cả')) +
-            '</button>' +
-          '</div>' +
-        '</div>' +
-        '<div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:6px;">';
+    resHtml += '</div></div>';
+  }
+  resHtml += '</div>';
 
-      for (let t = 1; t <= 6; t++) {
-        const isTierPreserved = isBaseChecked || autoFusePreservedJewelTypes.includes(b.id + t);
-        const tierCount = ownedTierCountMap[b.id + t] || 0;
-        const tStyle = getTierStyle(t);
-        const tColor = tStyle.color || '#58a6ff';
+  // Row 2: Ngọc Phụ Kiện (6 types) spanning across full width with multi-column subgrid
+  const accItems = baseTypes.filter(b => (b.category_vi === accCat.key_vi || b.category_en === accCat.key_en));
+  if (accItems.length > 0) {
+    resHtml += '<div style="background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; gap:10px; box-shadow:0 4px 12px rgba(0,0,0,0.25); margin-bottom:14px;">' +
+      '<div style="font-size:13px; font-weight:bold; color:#e3b341; border-bottom:1px solid #21262d; padding-bottom:6px; display:flex; justify-content:space-between; align-items:center;">' +
+        '<span>' + getLangTextOr(accCat.title_vi) + '</span>' +
+        '<span style="font-size:11px; color:#8b949e; font-weight:normal;">' + accItems.length + ' ' + (isEn ? 'types' : 'loại') + '</span>' +
+      '</div>' +
+      '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:10px;">';
 
-        resHtml += '<button type="button" onclick="toggleJewelTierPreservation(' + b.id + ', ' + t + ')" onmouseenter="showJewelBuffTooltip(event, ' + (b.id + t) + ')" onmouseleave="hideJewelBuffTooltip()" style="background:' + (isTierPreserved ? 'rgba(46,160,67,0.25)' : '#0d1117') + '; border:' + (isTierPreserved ? '1.5px solid #3fb950' : '1px solid #30363d') + '; color:' + (isTierPreserved ? '#7ee787' : tColor) + '; border-radius:6px; padding:4px 0; font-size:11.5px; font-weight:bold; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; transition:all 0.15s ease; box-shadow:' + (isTierPreserved ? '0 0 6px rgba(46,160,67,0.3)' : 'none') + ';">' +
-          '<span>' + (isTierPreserved ? '🛡️ ' : '') + 'T' + t + '</span>' +
-          '<span style="font-size:10px; opacity:' + (tierCount > 0 ? '1' : '0.45') + '; color:' + (tierCount > 0 ? '#58a6ff' : '#8b949e') + ';">' + tierCount + '</span>' +
-        '</button>';
-      }
-
-      resHtml += '</div></div>';
+    for (const b of accItems) {
+      resHtml += renderSingleJewelCard(b);
     }
 
     resHtml += '</div></div>';
   }
 
-  resHtml += '</div>';
-
-  resHtml += '<div style="font-size:12px; color:#8b949e; margin-top:12px; display:flex; align-items:center; gap:8px; background:#161b22; border:1px solid #30363d; border-radius:6px; padding:8px 12px;">' +
+  resHtml += '<div style="font-size:12px; color:#8b949e; display:flex; align-items:center; gap:8px; background:#161b22; border:1px solid #30363d; border-radius:6px; padding:8px 12px;">' +
     '<span style="font-size:16px;">💡</span>' +
     '<span>' +
       '<b>' + getLangTextOr('Hướng dẫn:') + '</b> ' + getLangTextOr('Bấm trực tiếp vào các ô T1 - T6 để bật/tắt giữ ngọc (ô chuyển sang viền xanh lá có khiên là được bảo vệ). Rê chuột vào ảnh ngọc hoặc nút T1-T6 để xem ảnh lớn và chỉ số buff chi tiết.') +
@@ -25827,10 +26063,10 @@ pause</code>
             <div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <h4 style="margin:0; color:#d2a8ff; font-size:14px; display:flex; align-items:center; gap:6px;">🪽 Cánh (Wings)</h4>
-                <span id="bdtWingBadge" style="font-size:11px; background:rgba(31,111,235,0.25); border:1px solid #1f6feb; color:#58a6ff; padding:2px 8px; border-radius:4px; font-weight:bold;">Magic (Tier 2)</span>
+                <span id="bdtWingBadge" style="font-size:11px; background:rgba(46,160,67,0.25); border:1px solid #2ea043; color:#7ee787; padding:2px 8px; border-radius:4px; font-weight:bold;">Magic (Tier 2)</span>
               </div>
               <div style="display:flex; align-items:center; gap:14px;">
-                <div id="bdtWingIcon" style="width:56px; height:56px; min-width:56px; background:rgba(56,139,253,0.18); display:flex; align-items:center; justify-content:center; border-radius:10px; border:1.5px solid #1f6feb; overflow:hidden; font-size:32px;">🪽</div>
+                <div id="bdtWingIcon" style="width:56px; height:56px; min-width:56px; background:rgba(46,160,67,0.18); display:flex; align-items:center; justify-content:center; border-radius:10px; border:1.5px solid #2ea043; overflow:hidden; font-size:32px;">🪽</div>
                 <div style="flex:1; min-width:0;">
                   <div id="bdtWingName" style="font-weight:bold; color:#f0f6fc; font-size:14px;">Cánh Viễn Chinh (Expedition Wings)</div>
                   <div style="font-size:11px; color:#8b949e; margin-top:2px;">Trang bị cánh hộ mệnh</div>
@@ -25847,10 +26083,10 @@ pause</code>
             <div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <h4 style="margin:0; color:#7ee787; font-size:14px; display:flex; align-items:center; gap:6px;">📜 Cổ Ngữ (Rune)</h4>
-                <span id="bdtRuneBadge" style="font-size:11px; background:rgba(31,111,235,0.25); border:1px solid #1f6feb; color:#58a6ff; padding:2px 8px; border-radius:4px; font-weight:bold;">Magic (Tier 2)</span>
+                <span id="bdtRuneBadge" style="font-size:11px; background:rgba(46,160,67,0.25); border:1px solid #2ea043; color:#7ee787; padding:2px 8px; border-radius:4px; font-weight:bold;">Magic (Tier 2)</span>
               </div>
               <div style="display:flex; align-items:center; gap:14px;">
-                <div id="bdtRuneIcon" style="width:56px; height:56px; min-width:56px; background:#0d1117; display:flex; align-items:center; justify-content:center; border-radius:10px; border:1.5px solid #7ee787; overflow:hidden; font-size:32px;">📜</div>
+                <div id="bdtRuneIcon" style="width:56px; height:56px; min-width:56px; background:#0d1117; display:flex; align-items:center; justify-content:center; border-radius:10px; border:1.5px solid #2ea043; overflow:hidden; font-size:32px;">📜</div>
                 <div style="flex:1; min-width:0;">
                   <div id="bdtRuneName" style="font-weight:bold; color:#f0f6fc; font-size:14px;">Cổ Ngữ Thám Hiểm (Explorer's Rune)</div>
                   <div style="font-size:11px; color:#8b949e; margin-top:2px;">Cổ ngữ bổ trợ farm</div>
@@ -27176,11 +27412,11 @@ function getSystemTierStyle(tier) {
   tier = Number(tier) || 1;
   const map = {
     1: { name: 'Normal', border: '#484f58', bg: 'rgba(110,118,129,0.15)', text: '#8b949e', badgeBg: '#21262d' },
-    2: { name: 'Magic', border: '#1f6feb', bg: 'rgba(56,139,253,0.18)', text: '#58a6ff', badgeBg: 'rgba(31,111,235,0.25)' },
-    3: { name: 'Rare', border: '#8957e5', bg: 'rgba(137,87,229,0.18)', text: '#bc8cff', badgeBg: 'rgba(137,87,229,0.25)' },
+    2: { name: 'Magic', border: '#2ea043', bg: 'rgba(46,160,67,0.18)', text: '#7ee787', badgeBg: 'rgba(46,160,67,0.25)' },
+    3: { name: 'Rare', border: '#388bfd', bg: 'rgba(56,139,253,0.18)', text: '#58a6ff', badgeBg: 'rgba(31,111,235,0.25)' },
     4: { name: 'Epic', border: '#da3633', bg: 'rgba(218,54,51,0.18)', text: '#ff7b72', badgeBg: 'rgba(218,54,51,0.25)' },
-    5: { name: 'Legendary', border: '#d29922', bg: 'rgba(210,153,34,0.18)', text: '#e3b341', badgeBg: 'rgba(210,153,34,0.25)' },
-    6: { name: 'Mythic', border: '#f0883e', bg: 'rgba(240,136,62,0.22)', text: '#ffa657', badgeBg: 'rgba(240,136,62,0.25)' }
+    5: { name: 'Legendary', border: '#8957e5', bg: 'rgba(137,87,229,0.18)', text: '#bc8cff', badgeBg: 'rgba(137,87,229,0.25)' },
+    6: { name: 'Mythic', border: '#f2cc60', bg: 'rgba(242,204,96,0.18)', text: '#f2cc60', badgeBg: 'rgba(242,204,96,0.25)' }
   };
   return map[tier] || map[1];
 }
@@ -28903,7 +29139,65 @@ window.GenesisGameBridge = {
               skillCooldownReduction: Number(getAb(1082).toFixed(1)),
               lightningDamage: Number(getAb(1032).toFixed(1)),
               poisonDamage: Number(getAb(1042).toFixed(1)),
-              ignoreBlock: Math.round(getAb(1092))
+              ignoreBlock: Math.round(getAb(1092)),
+              finalDamageBonus: Number(getAb(1146).toFixed(1)),
+              finalDamageReduction: Number(getAb(1147).toFixed(1)),
+              pveDamageDealt: Number(getAb(1060).toFixed(1)),
+              pveDamageTakenReduction: Number(getAb(1061).toFixed(1)),
+              pvpDamageDealt: Number(getAb(1062).toFixed(1)),
+              pvpDamageTakenReduction: Number(getAb(1063).toFixed(1)),
+              critRateResist: Number(getAb(1074).toFixed(1)),
+              blockRate: Number(getAb(1090).toFixed(1)),
+              stunResist: Number(getAb(1075).toFixed(1)),
+              stunDurationReduction: Number(getAb(1076).toFixed(1)),
+              lightningHitRate: Number(getAb(1030).toFixed(1)),
+              fireHitRate: Number(getAb(1035).toFixed(1)),
+              poisonHitRate: Number(getAb(1040).toFixed(1)),
+              stunHitRate: Number(getAb(1045).toFixed(1)),
+              shockDebuffRate: Number(getAb(1097).toFixed(1)),
+              burnDebuffRate: Number(getAb(1099).toFixed(1)),
+              poisonDebuffRate: Number(getAb(1098).toFixed(1)),
+              shockDebuffResist: Number(getAb(1103).toFixed(1)),
+              burnDebuffResist: Number(getAb(1105).toFixed(1)),
+              poisonDebuffResist: Number(getAb(1104).toFixed(1)),
+              allElementDmgResist: Number(getAb(1072).toFixed(1)),
+              lightningDmgResist: Number((getAb(1069) + getAb(1072)).toFixed(1)),
+              fireDmgResist: Number((getAb(1070) + getAb(1072)).toFixed(1)),
+              poisonDmgResist: Number((getAb(1071) + getAb(1072)).toFixed(1)),
+              allElementResist: Number(getAb(1080).toFixed(1)),
+              lightningResist: Number((getAb(1077) + getAb(1080) + getAb(1069) + getAb(1072)).toFixed(1)),
+              fireResist: Number((getAb(1078) + getAb(1080) + getAb(1070) + getAb(1072)).toFixed(1)),
+              poisonResist: Number((getAb(1079) + getAb(1080) + getAb(1071) + getAb(1072)).toFixed(1)),
+              fireDamage: Number(getAb(1037).toFixed(1)),
+              hitRate: Number(getAb(108).toFixed(1)),
+              evasion: Number(getAb(109).toFixed(1)),
+
+              monsterExpFlat: Math.round(getAb(1117)),
+              bossExpFlat: Math.round(getAb(1119)),
+              monsterExpBonusPct: Math.round(getAb(1118)) + Math.round(getAb(1121)),
+              bossExpBonusPct: Math.round(getAb(1120)) + Math.round(getAb(1121)),
+              allExpBonusPct: Math.round(getAb(1121)),
+              monsterExpBonus: Math.round(getAb(1118)) + Math.round(getAb(1121)),
+              bossExpBonus: Math.round(getAb(1120)) + Math.round(getAb(1121)),
+              offlineExpBonusPct: Math.round(getAb(1123)),
+
+              monsterGoldFlat: Math.round(getAb(1109)),
+              bossGoldFlat: Math.round(getAb(1111)),
+              monsterGoldBonusPct: Math.round(getAb(1110)) + Math.round(getAb(1113)),
+              bossGoldBonusPct: Math.round(getAb(1112)) + Math.round(getAb(1113)),
+              allGoldBonusPct: Math.round(getAb(1113)),
+              monsterGoldBonus: Math.round(getAb(1110)) + Math.round(getAb(1113)),
+              bossGoldBonus: Math.round(getAb(1112)) + Math.round(getAb(1113)),
+              offlineGoldBonusPct: Math.round(getAb(1115)),
+              goldStorageLimit: Math.round(getAb(1116)),
+
+              equipDropRatePct: Math.round(getAb(1130)),
+              monsterDropRatePct: Math.round(getAb(1127)) + Math.round(getAb(1130)),
+              bossDropRatePct: Math.round(getAb(1129)) + Math.round(getAb(1130)),
+              monsterBaseDropRatePct: Math.round(getAb(1127)),
+              bossBaseDropRatePct: Math.round(getAb(1129)),
+              monsterDropIntervalReduction: Number(getAb(1125).toFixed(1)),
+              bossSummonKillReduction: Math.round(getAb(1131))
             };
           }
         } catch(e) {}
